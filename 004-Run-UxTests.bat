@@ -1,4 +1,3 @@
 @echo off
-REM python311 -v uxtest\uxtest.py 
-pytest uxtest\uxtest.py --html=report.html
+pytest uxtest\uxtest.py --html=ux-test-report.html --self-contained-html
 
