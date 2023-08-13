@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run Selenium Tests",
+            "label": "004 Run Selenium Tests",
             "type": "shell",
             "command": "python3.8",
             "args": ["uxtest\\uxtest.py"],
@@ -12,7 +12,7 @@
             }
         },
         {
-            "label": "Deploy UX",
+            "label": "002 Deploy UX",
             "type": "shell",
             "command": "python3.8",
             "args": [
@@ -29,7 +29,7 @@
             }
         },
         {
-            "label": "Deploy API",
+            "label": "001 Deploy API",
             "type": "shell",
             "command": "python3.8",
             "args": [
@@ -41,7 +41,7 @@
             }
         },
         {
-            "label": "Run Unit Tests",
+            "label": "003 Run Unit Tests",
             "type": "shell",
             "command": "python3.8",
             "args": [
