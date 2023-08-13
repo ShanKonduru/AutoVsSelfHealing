@@ -1,2 +1,2 @@
 @echo off
-python3.8 api\MyPyCalc.py
+python311 api\MyPyCalc.py

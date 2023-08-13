@@ -5,7 +5,16 @@ import unittest
 class TestUI(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome()  # Change to appropriate WebDriver
+        # chrome_driver_path = './chromedriver.exe'  # Update this path
+        # chrome_options = webdriver.ChromeOptions()
+        # Add any desired options to chrome_options here
+        # For example, to run Chrome in headless mode:
+        # chrome_options.add_argument('--headless')
+
+        # Create Chrome WebDriver instance using options
+        # self.driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
+        # self.driver = webdriver.Chrome(options=chrome_options)
+        self.driver = webdriver.Chrome()
 
     def test_addition(self):
         self.driver.get("http://localhost:8888/ux")  # Change the URL as needed
