@@ -1,90 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyPyCalc Web Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+      }
 
-        input {
-            padding: 5px;
-            margin: 5px;
-        }
+      input {
+        padding: 5px;
+        margin: 5px;
+      }
 
-        button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+      button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
 
-        button:hover {
-            background-color: #0056b3;
-        }
+      button:hover {
+        background-color: #0056b3;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>MyPyCalc Web Page</h1>
     <div>
-        <label for="num1">Num 1:</label>
-        <input type="number" id="num1" required>
+      <label for="num1">Num 1:</label>
+      <input type="number" id="num1" required />
     </div>
     <div>
-        <label for="num2">Num 2:</label>
-        <input type="number" id="num2" required>
+      <label for="num2">Num 2:</label>
+      <input type="number" id="num2" required />
     </div>
     <div>
-        <button id="addBtn">Add</button>
-        <button id="subtractBtn">Subtract</button>
+      <button id="addBtn">Add</button>
+      <button id="subtractBtn">Subtract</button>
     </div>
     <div>
-        <label id="resultLabel">result: </label>
+      <label id="resultLabel">result: </label>
     </div>
 
     <script>
-        const addBtn = document.getElementById('addBtn');
-        const subtractBtn = document.getElementById('subtractBtn');
-        const num1Input = document.getElementById('num1');
-        const num2Input = document.getElementById('num2');
-        const resultLabel = document.getElementById('resultLabel');
+      const addBtn = document.getElementById("addBtn");
+      const subtractBtn = document.getElementById("subtractBtn");
+      const num1Input = document.getElementById("num1");
+      const num2Input = document.getElementById("num2");
+      const resultLabel = document.getElementById("resultLabel");
 
-        function displayResult(result) {
-            resultLabel.textContent = `Result: ${result}`;
-        }
+      const apiPort = 5000; // Change this to your desired port number
 
-        addBtn.addEventListener('click', async () => {
-            const num1 = parseFloat(num1Input.value);
-            const num2 = parseFloat(num2Input.value);
-            const response = await fetch('/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ num1, num2 })
-            });
-            const data = await response.json();
-            displayResult(data.result);
+      function displayResult(result) {
+        resultLabel.textContent = `Result: ${result}`;
+      }
+
+      addBtn.addEventListener("click", async () => {
+        const num1 = parseFloat(num1Input.value);
+        const num2 = parseFloat(num2Input.value);
+        const response = await fetch(`http://localhost:${apiPort}/add`, {
+          // Use the apiPort variable
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ num1, num2 }),
         });
+        const data = await response.json();
+        displayResult(data.result);
+      });
 
-        subtractBtn.addEventListener('click', async () => {
-            const num1 = parseFloat(num1Input.value);
-            const num2 = parseFloat(num2Input.value);
-            const response = await fetch('/subtract', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ num1, num2 })
-            });
-            const data = await response.json();
-            displayResult(data.result);
-        });
+      subtractBtn.addEventListener("click", async () => {
+        const num1 = parseFloat(num1Input.value);
+        const num2 = parseFloat(num2Input.value);
+        const response = await fetch(
+          `http://localhost:${apiPort}/subtract`,
+          {
+            // Use the apiPort variable
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ num1, num2 }),
+          }
+        );
+        const data = await response.json();
+        displayResult(data.result);
+      });
     </script>
-</body>
+  </body>
 </html>
