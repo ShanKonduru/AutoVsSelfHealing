@@ -1,14 +1,12 @@
-import time
-
 from selenium import webdriver
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
+from CustomTestLoader import CustomTestLoader
 
 import time
 import unittest
 
 class TestUI(unittest.TestCase):
-
     def setUp(self):
         # chrome_driver_path = './chromedriver.exe'  # Update this path
         # chrome_options = webdriver.ChromeOptions()
@@ -20,7 +18,7 @@ class TestUI(unittest.TestCase):
         # self.driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
         # self.driver = webdriver.Chrome(options=chrome_options)
         # self.driver = webdriver.Chrome()
-        
+
         # Create a WebDriver instance (example using Chrome)
         self.driver = Chrome()
 
@@ -35,7 +33,7 @@ class TestUI(unittest.TestCase):
         num2_input.send_keys("3")
         add_button.click()
         time.sleep(2)
-        result_label = self.driver.find_element(By.ID,"resultLabel")
+        result_label = self.driver.find_element(By.ID, "resultLabel")
         result_text = result_label.text
         self.assertEqual(result_text, "Result: 8")
 
@@ -57,5 +55,24 @@ class TestUI(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+
 if __name__ == "__main__":
-    unittest.main()
+    test_loader = CustomTestLoader()
+    test_suite = unittest.TestSuite()
+
+    # Add your test cases here
+    test_suite.addTest(TestUI("test_addition"))
+    test_suite.addTest(TestUI("test_subtraction"))
+
+    # Use the built-in HTMLTestRunner
+    runner = unittest.TextTestRunner(verbosity=2)
+    result = runner.run(test_suite)
+
+    # Generate the HTML report
+    with open("test_report.html", "w") as report_file:
+        runner = unittest.HTMLTestRunner(
+            stream=report_file,
+            title="UI Test Report",
+            description="Test results for UI functionality"
+        )
+        runner.run(test_suite)
