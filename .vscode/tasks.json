@@ -2,6 +2,19 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Deploy HTML",
+            "type": "shell",
+            "command": "python",
+            "args": ["-m", "http.server", "8888"],
+            "options": {
+                "cwd": "${workspaceFolder}/ux"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Run API",
             "type": "shell",
             "command": "python3.8",
