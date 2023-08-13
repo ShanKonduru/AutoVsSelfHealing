@@ -10,8 +10,8 @@ readme = "README.md"
 python = "^3.11"
 Flask = "^2.3.2"
 jsonify = "^0.5"
-Flask = "^2.3.2"
-
+Flask-Cors = "^4.0.0"
+selenium = "^4.11.2"
 
 [build-system]
 requires = ["poetry-core"]
