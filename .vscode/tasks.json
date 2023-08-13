@@ -4,8 +4,12 @@
         {
             "label": "Deploy HTML",
             "type": "shell",
-            "command": "python",
-            "args": ["-m", "http.server", "8888"],
+            "command": "python3.8",
+            "args": [
+                "-m",
+                "http.server",
+                "8888"
+            ],
             "options": {
                 "cwd": "${workspaceFolder}/ux"
             },
@@ -34,7 +38,8 @@
                 "-m",
                 "unittest",
                 "apitest\\TestMyPyCalc.py"
-            ]
+            ],
+            "problemMatcher": []
         }
     ]
 }
