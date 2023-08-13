@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "autovsselfhealing"
+version = "0.1.0"
+description = "this program demos auto healing and self healing capabilities for api and ux tests"
+authors = ["Shan Konduru <ShanKonduru@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Flask = "^2.3.2"
+jsonify = "^0.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

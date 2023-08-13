@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run API",
+            "type": "shell",
+            "command": "python3.8",
+            "args": [
+                "api\\MyPyCalc.py"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Unit Tests",
+            "type": "shell",
+            "command": "python3.8",
+            "args": [
+                "-m",
+                "unittest",
+                "apitest\\TestMyPyCalc.py"
+            ]
+        }
+    ]
+}
