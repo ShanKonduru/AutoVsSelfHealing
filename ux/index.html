@@ -63,31 +63,39 @@
       addBtn.addEventListener("click", async () => {
         const num1 = parseFloat(num1Input.value);
         const num2 = parseFloat(num2Input.value);
-        const response = await fetch(`http://localhost:${apiPort}/add`, {
-          // Use the apiPort variable
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ num1, num2 }),
-        });
-        const data = await response.json();
-        displayResult(data.result);
+        if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
+          const response = await fetch(`http://localhost:${apiPort}/add`, {
+            // Use the apiPort variable
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ num1, num2 }),
+          });
+          const data = await response.json();
+          displayResult(data.result);
+        } else {
+          resultLabel.textContent = "num1 or num2 is either zero or invalid.";
+        }
       });
 
       subtractBtn.addEventListener("click", async () => {
         const num1 = parseFloat(num1Input.value);
         const num2 = parseFloat(num2Input.value);
-        const response = await fetch(`http://localhost:${apiPort}/subtract`, {
-          // Use the apiPort variable
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ num1, num2 }),
-        });
-        const data = await response.json();
-        displayResult(data.result);
+        if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
+          const response = await fetch(`http://localhost:${apiPort}/subtract`, {
+            // Use the apiPort variable
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ num1, num2 }),
+          });
+          const data = await response.json();
+          displayResult(data.result);
+        } else {
+          resultLabel.textContent = "num1 or num2 is either zero or invalid.";
+        }
       });
     </script>
   </body>
