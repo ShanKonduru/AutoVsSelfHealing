@@ -1,13 +1,14 @@
 {
 	"info": {
-		"_postman_id": "758cb17d-786c-45b0-9258-5815f90c790d",
+		"_postman_id": "6ba48970-94d3-4fa8-8519-91ea85ff8250",
 		"name": "SelfHealingExample",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28112320"
+		"_exporter_id": "28112320",
+		"_collection_link": "https://warped-crescent-138840.postman.co/workspace/My-Workspace~cbb73a7d-9372-45df-8c30-140e15d1ab2b/collection/28112320-6ba48970-94d3-4fa8-8519-91ea85ff8250?action=share&creator=28112320&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "AddTwoNumbers",
+			"name": "AddTwoNumbers-127.0.0.1",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -38,7 +39,35 @@
 			"response": []
 		},
 		{
-			"name": "SubtractTwoNumbers",
+			"name": "AddTwoNumbers-LocalHost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"num1\":10,\r\n    \"num2\":20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubtractTwoNumbers-127.0.0.1",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -59,6 +88,34 @@
 						"0",
 						"0",
 						"1"
+					],
+					"port": "5000",
+					"path": [
+						"subtract"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SubtractTwoNumbers-localhost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"num1\":20,\r\n    \"num2\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/subtract",
+					"protocol": "http",
+					"host": [
+						"localhost"
 					],
 					"port": "5000",
 					"path": [
