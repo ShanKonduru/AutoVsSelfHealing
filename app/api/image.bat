@@ -1,6 +1,6 @@
 @echo off
 
-set NETWORK_NAME=my-api-network
+set NETWORK_NAME=my-pycalc-network
 
 REM Check if the network exists
 docker network inspect %NETWORK_NAME% >nul 2>&1
