@@ -1,3 +1,3 @@
 @echo off
-python -m unittest -v apitest\TestMyPyCalc.py 
+python -m unittest -v apptest\apitest\TestMyPyCalc.py 
 

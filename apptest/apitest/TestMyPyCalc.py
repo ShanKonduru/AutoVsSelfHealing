@@ -1,6 +1,6 @@
 import unittest
 import json
-from api.MyPyCalc import app
+from app.api.MyPyCalc import app
 
 class MyPyCalcTest(unittest.TestCase):
 

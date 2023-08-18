@@ -20,7 +20,7 @@ class TestUI(unittest.TestCase):
     def test_addition(self):
         log = logging.getLogger(__name__)
         log.info("test_addition")
-        self.driver.get("http://localhost:8888/ux")  # Change the URL as needed
+        self.driver.get("http://localhost:8888/app/ux")  # Change the URL as needed
         time.sleep(2)
         num1_input = self.driver.find_element(By.ID, "num1")
         num2_input = self.driver.find_element(By.ID, "num2")
@@ -40,7 +40,7 @@ class TestUI(unittest.TestCase):
     def test_subtraction(self):
         log = logging.getLogger(__name__)
         log.info("Subtract started")
-        self.driver.get("http://localhost:8888/ux")  # Change the URL as needed
+        self.driver.get("http://localhost:8888/app/ux")  # Change the URL as needed
         time.sleep(2)
         num1_input = self.driver.find_element(By.ID, "num1")
         num2_input = self.driver.find_element(By.ID, "num2")
