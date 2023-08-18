@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    build:
+      context: ./app/api
+      dockerfile: Dockerfile.api
+    ports:
+      - "5000:5000"
+    networks:
+      - my-pycalc-network
+    deploy:
+      replicas: 3  # Set the desired number of replicas
+
+  ux:
+    build:
+      context: ./app/ux
+      dockerfile: Dockerfile.ux
+    ports:
+      - "8888:8888"
+    networks:
+      - my-pycalc-network
+    deploy:
+      replicas: 2  # Set the desired number of replicas
+
+networks:
+  my-pycalc-network:
