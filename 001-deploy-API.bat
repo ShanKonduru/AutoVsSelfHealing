@@ -1,2 +1,2 @@
 @echo off
-python api\MyPyCalc.py
+python app\api\MyPyCalc.py
