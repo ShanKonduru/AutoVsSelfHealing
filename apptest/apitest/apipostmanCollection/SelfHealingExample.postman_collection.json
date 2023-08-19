@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "6ba48970-94d3-4fa8-8519-91ea85ff8250",
+		"_postman_id": "6333aebf-8eb8-4f12-b821-6722498c27ac",
 		"name": "SelfHealingExample",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "28112320",
-		"_collection_link": "https://warped-crescent-138840.postman.co/workspace/My-Workspace~cbb73a7d-9372-45df-8c30-140e15d1ab2b/collection/28112320-6ba48970-94d3-4fa8-8519-91ea85ff8250?action=share&creator=28112320&source=collection_link"
+		"_collection_link": "https://warped-crescent-138840.postman.co/workspace/Team-Workspace~11a95f65-f2a5-4735-8ea2-7cc18767606d/collection/28112320-6333aebf-8eb8-4f12-b821-6722498c27ac?action=share&source=collection_link&creator=28112320"
 	},
 	"item": [
 		{
@@ -123,6 +123,107 @@
 							"port": "5000",
 							"path": [
 								"subtract"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InsertDB",
+			"item": [
+				{
+					"name": "AddInsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operand_one\": 5,\r\n    \"operand_two\": 3,\r\n    \"operator\": \"Add\",\r\n    \"result\": 8\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/insert",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubtractInsert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operand_one\": 5,\r\n    \"operand_two\": 3,\r\n    \"operator\": \"Sub\",\r\n    \"result\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/insert",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllRecords",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/get_all_records",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"get_all_records"
 							]
 						}
 					},

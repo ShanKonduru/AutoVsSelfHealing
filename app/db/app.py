@@ -28,6 +28,33 @@ def setup_database():
     conn.commit()
     conn.close()
 
+@app.route('/get_all_records', methods=['GET'])
+def get_all_records():
+    conn = sqlite3.connect('calculator.db')
+    cursor = conn.cursor()
+
+    # Retrieve all records from the calculations table
+    cursor.execute('SELECT * FROM calculations')
+    records = cursor.fetchall()
+
+    conn.close()
+
+    # Convert records to a list of dictionaries
+    records_list = []
+    for record in records:
+        record_dict = {
+            'Id': record[0],
+            'OperandOne': record[1],
+            'OperandTwo': record[2],
+            'Operator': record[3],
+            'Result': record[4],
+            'DateOfCreation': record[5]
+        }
+        records_list.append(record_dict)
+
+    return jsonify(records_list)
+
+
 @app.route('/insert', methods=['POST'])
 def insert_calculation():
     data = request.get_json()
@@ -56,4 +83,4 @@ def insert_calculation():
 
 if __name__ == '__main__':
     setup_database()
-    app.run(port=5555)
+    app.run(debug=True, host='0.0.0.0', port=5555)
