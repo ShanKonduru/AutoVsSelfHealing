@@ -2,12 +2,12 @@ version: '3'
 services:
   api:
     image: my-pycalc-api:latest
-    dockerfile: ./app/api/Dockerfile.api
+    # dockerfile: ./app/api/Dockerfile.api
     ports:
       - "5000:5000"
 
   ux:
     image: my-pycalc-ux:latest
-    dockerfile: ./app/ux/Dockerfile.ux
+    # dockerfile: ./app/ux/Dockerfile.ux
     ports:
       - "8888:8888"

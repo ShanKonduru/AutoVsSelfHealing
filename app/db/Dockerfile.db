@@ -1,0 +1,14 @@
+# Use an official Python runtime as the base image
+FROM python:3.8-slim
+
+# Set the working directory within the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run setup_database and then start the application
+CMD python -c "from app import setup_database; setup_database(); from app import app; app.run(host='0.0.0.0', port=5555)"
