@@ -74,6 +74,32 @@
           });
           const data = await response.json();
           displayResult(data.result);
+          
+          const resultdata = {
+                operand_one: num1,
+                operand_two: num2,
+                operator: "Add",
+                result: data.result,
+                date_of_creation: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('http://localhost:5555/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Calculation inserted successfully.');
+                } else {
+                    alert('Error inserting calculation.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
           resultLabel.textContent = "num1 or num2 is either zero or invalid.";
         }
@@ -93,6 +119,32 @@
           });
           const data = await response.json();
           displayResult(data.result);
+
+          const resultdata = {
+                operand_one: num1,
+                operand_two: num2,
+                operator: "Sub",
+                result: data.result,
+                date_of_creation: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch('http://localhost:5555/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Calculation inserted successfully.');
+                } else {
+                    alert('Error inserting calculation.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         } else {
           resultLabel.textContent = "num1 or num2 is either zero or invalid.";
         }
