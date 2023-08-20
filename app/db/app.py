@@ -2,7 +2,10 @@ from flask import Flask, request, jsonify
 import sqlite3
 import datetime
 
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:8888"}})
 
 def setup_database():
     conn = sqlite3.connect('calculator.db')

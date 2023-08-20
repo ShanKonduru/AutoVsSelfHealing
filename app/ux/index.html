@@ -46,8 +46,29 @@
     <div>
       <label id="resultLabel">result: </label>
     </div>
+    <div>
+      <button id="fetchButton">Fetch Records</button>
+      <ul id="recordsList"></ul>
+    </div>
 
     <script>
+      const fetchButton = document.getElementById('fetchButton');
+        const recordsList = document.getElementById('recordsList');
+
+        fetchButton.addEventListener('click', () => {
+            fetch('http://localhost:5555/get_all_records')
+                .then(response => response.json())
+                .then(records => {
+                    recordsList.innerHTML = '';
+                    records.forEach(record => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `ID: ${record.Id}, OperandOne: ${record.OperandOne}, OperandTwo: ${record.OperandTwo}, Operator: ${record.Operator}, Result: ${record.Result}, DateOfCreation: ${record.DateOfCreation}`;
+                        recordsList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        
       const addBtn = document.getElementById("addBtn");
       const subtractBtn = document.getElementById("subtractBtn");
       const num1Input = document.getElementById("num1");
