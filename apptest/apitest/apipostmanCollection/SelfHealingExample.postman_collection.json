@@ -228,6 +228,40 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetAllRecords-localhost",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5555/get_all_records",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5555",
+							"path": [
+								"get_all_records"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
