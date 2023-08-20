@@ -1,3 +1,3 @@
 @echo off
-docker stack services my-pycalc-stack
+docker stack services autovsselfhealing
 

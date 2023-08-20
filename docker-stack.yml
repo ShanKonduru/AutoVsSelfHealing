@@ -1,13 +1,32 @@
-version: '3'
+version: '3.8'
+
 services:
   api:
-    image: my-pycalc-api:latest
-    # dockerfile: ./app/api/Dockerfile.api
+    image: shankonduru/autovsselfhealing-api:latest
     ports:
       - "5000:5000"
+    networks:
+      - my-pycalc-network
+    deploy:
+      replicas: 1  # Set the desired number of replicas
+
+  db:
+    image: shankonduru/autovsselfhealing-db:latest
+    ports:
+      - "5555:5555"
+    networks:
+      - my-pycalc-network
+    deploy:
+      replicas: 1  # Set the desired number of replicas
 
   ux:
-    image: my-pycalc-ux:latest
-    # dockerfile: ./app/ux/Dockerfile.ux
+    image: shankonduru/autovsselfhealing-ux:latest
     ports:
       - "8888:8888"
+    networks:
+      - my-pycalc-network
+    deploy:
+      replicas: 1  # Set the desired number of replicas
+
+networks:
+  my-pycalc-network:
