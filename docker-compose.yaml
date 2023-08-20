@@ -9,7 +9,7 @@ services:
     networks:
       - my-pycalc-network
     deploy:
-      replicas: 3  # Set the desired number of replicas
+      replicas: 1  # Set the desired number of replicas
 
   db:
     build:
@@ -20,7 +20,7 @@ services:
     networks:
       - my-pycalc-network
     deploy:
-      replicas: 3  # Set the desired number of replicas
+      replicas: 1  # Set the desired number of replicas
 
   ux:
     build:
@@ -31,7 +31,7 @@ services:
     networks:
       - my-pycalc-network
     deploy:
-      replicas: 2  # Set the desired number of replicas
+      replicas: 1  # Set the desired number of replicas
 
 networks:
   my-pycalc-network:

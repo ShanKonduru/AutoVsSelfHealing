@@ -28,6 +28,14 @@
     button:hover {
       background-color: #0056b3;
     }
+
+    #fetchButton {
+      margin-top: 20px;
+    }
+
+    #recordsTable {
+      margin: 0 auto;
+    }
   </style>
 </head>
 
@@ -49,7 +57,7 @@
     <label id="resultLabel">result: </label>
   </div>
   <div>
-    <h1>API Interaction</h1>
+    <h1>Fetch Records</h1>
     <button id="fetchButton">Fetch Records</button>
     <table id="recordsTable" border="1">
       <thead>
@@ -136,9 +144,9 @@
           });
 
           if (response.ok) {
-            alert('Calculation inserted successfully.');
+            console.info('Calculation inserted successfully.');
           } else {
-            alert('Error inserting calculation.');
+            console.error('Error inserting calculation.');
           }
         } catch (error) {
           console.error('Error:', error);
@@ -181,9 +189,9 @@
           });
 
           if (response.ok) {
-            alert('Calculation inserted successfully.');
+            console.info('Calculation inserted successfully.');
           } else {
-            alert('Error inserting calculation.');
+            console.error('Error inserting calculation.');
           }
         } catch (error) {
           console.error('Error:', error);
