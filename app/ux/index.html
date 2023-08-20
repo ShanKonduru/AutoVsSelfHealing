@@ -1,175 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyPyCalc Web Page</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 50px;
-      }
 
-      input {
-        padding: 5px;
-        margin: 5px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyPyCalc Web Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
 
-      button {
-        padding: 5px 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
+    input {
+      padding: 5px;
+      margin: 5px;
+    }
 
-      button:hover {
-        background-color: #0056b3;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>MyPyCalc Web Page</h1>
-    <div>
-      <label for="num1">Num 1:</label>
-      <input type="number" id="num1" required />
-    </div>
-    <div>
-      <label for="num2">Num 2:</label>
-      <input type="number" id="num2" required />
-    </div>
-    <div>
-      <button id="addBtn">Add</button>
-      <button id="subtractBtn">Subtract</button>
-    </div>
-    <div>
-      <label id="resultLabel">result: </label>
-    </div>
-    <div>
-      <button id="fetchButton">Fetch Records</button>
-      <ul id="recordsList"></ul>
-    </div>
+    button {
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
 
-    <script>
-      const fetchButton = document.getElementById('fetchButton');
-        const recordsList = document.getElementById('recordsList');
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
 
-        fetchButton.addEventListener('click', () => {
-            fetch('http://localhost:5555/get_all_records')
-                .then(response => response.json())
-                .then(records => {
-                    recordsList.innerHTML = '';
-                    records.forEach(record => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `ID: ${record.Id}, OperandOne: ${record.OperandOne}, OperandTwo: ${record.OperandTwo}, Operator: ${record.Operator}, Result: ${record.Result}, DateOfCreation: ${record.DateOfCreation}`;
-                        recordsList.appendChild(listItem);
-                    });
-                })
-                .catch(error => console.error('Error:', error));
+<body>
+  <h1>MyPyCalc Web Page</h1>
+  <div>
+    <label for="num1">Num 1:</label>
+    <input type="number" id="num1" required />
+  </div>
+  <div>
+    <label for="num2">Num 2:</label>
+    <input type="number" id="num2" required />
+  </div>
+  <div>
+    <button id="addBtn">Add</button>
+    <button id="subtractBtn">Subtract</button>
+  </div>
+  <div>
+    <label id="resultLabel">result: </label>
+  </div>
+  <div>
+    <h1>API Interaction</h1>
+    <button id="fetchButton">Fetch Records</button>
+    <table id="recordsTable" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>OperandOne</th>
+          <th>OperandTwo</th>
+          <th>Operator</th>
+          <th>Result</th>
+          <th>DateOfCreation</th>
+        </tr>
+      </thead>
+      <tbody id="recordsBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const fetchButton = document.getElementById('fetchButton');
+    const recordsBody = document.getElementById('recordsBody');
+
+    fetchButton.addEventListener('click', () => {
+      fetch('http://localhost:5555/get_all_records')
+        .then(response => response.json())
+        .then(records => {
+          recordsBody.innerHTML = '';
+          records.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                            <td>${record.Id}</td>
+                            <td>${record.OperandOne}</td>
+                            <td>${record.OperandTwo}</td>
+                            <td>${record.Operator}</td>
+                            <td>${record.Result}</td>
+                            <td>${record.DateOfCreation}</td>
+                        `;
+            recordsBody.appendChild(row);
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    const addBtn = document.getElementById("addBtn");
+    const subtractBtn = document.getElementById("subtractBtn");
+    const num1Input = document.getElementById("num1");
+    const num2Input = document.getElementById("num2");
+    const resultLabel = document.getElementById("resultLabel");
+
+    const apiPort = 5000; // Change this to your desired port number
+
+    function displayResult(result) {
+      resultLabel.textContent = `Result: ${result}`;
+    }
+
+    addBtn.addEventListener("click", async () => {
+      const num1 = parseFloat(num1Input.value);
+      const num2 = parseFloat(num2Input.value);
+      if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
+        const response = await fetch(`http://localhost:${apiPort}/add`, {
+          // Use the apiPort variable
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ num1, num2 }),
         });
-        
-      const addBtn = document.getElementById("addBtn");
-      const subtractBtn = document.getElementById("subtractBtn");
-      const num1Input = document.getElementById("num1");
-      const num2Input = document.getElementById("num2");
-      const resultLabel = document.getElementById("resultLabel");
+        const data = await response.json();
+        displayResult(data.result);
 
-      const apiPort = 5000; // Change this to your desired port number
+        const resultdata = {
+          operand_one: num1,
+          operand_two: num2,
+          operator: "Add",
+          result: data.result,
+          date_of_creation: new Date().toISOString()
+        };
 
-      function displayResult(result) {
-        resultLabel.textContent = `Result: ${result}`;
+        try {
+          const response = await fetch('http://localhost:5555/insert', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(resultdata)
+          });
+
+          if (response.ok) {
+            alert('Calculation inserted successfully.');
+          } else {
+            alert('Error inserting calculation.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      } else {
+        resultLabel.textContent = "num1 or num2 is either zero or invalid.";
       }
+    });
 
-      addBtn.addEventListener("click", async () => {
-        const num1 = parseFloat(num1Input.value);
-        const num2 = parseFloat(num2Input.value);
-        if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
-          const response = await fetch(`http://localhost:${apiPort}/add`, {
-            // Use the apiPort variable
-            method: "POST",
+    subtractBtn.addEventListener("click", async () => {
+      const num1 = parseFloat(num1Input.value);
+      const num2 = parseFloat(num2Input.value);
+      if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
+        const response = await fetch(`http://localhost:${apiPort}/subtract`, {
+          // Use the apiPort variable
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ num1, num2 }),
+        });
+        const data = await response.json();
+        displayResult(data.result);
+
+        const resultdata = {
+          operand_one: num1,
+          operand_two: num2,
+          operator: "Sub",
+          result: data.result,
+          date_of_creation: new Date().toISOString()
+        };
+
+        try {
+          const response = await fetch('http://localhost:5555/insert', {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ num1, num2 }),
+            body: JSON.stringify(resultdata)
           });
-          const data = await response.json();
-          displayResult(data.result);
-          
-          const resultdata = {
-                operand_one: num1,
-                operand_two: num2,
-                operator: "Add",
-                result: data.result,
-                date_of_creation: new Date().toISOString()
-            };
 
-            try {
-                const response = await fetch('http://localhost:5555/insert', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(resultdata)
-                });
-
-                if (response.ok) {
-                    alert('Calculation inserted successfully.');
-                } else {
-                    alert('Error inserting calculation.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        } else {
-          resultLabel.textContent = "num1 or num2 is either zero or invalid.";
+          if (response.ok) {
+            alert('Calculation inserted successfully.');
+          } else {
+            alert('Error inserting calculation.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
         }
-      });
+      } else {
+        resultLabel.textContent = "num1 or num2 is either zero or invalid.";
+      }
+    });
+  </script>
+</body>
 
-      subtractBtn.addEventListener("click", async () => {
-        const num1 = parseFloat(num1Input.value);
-        const num2 = parseFloat(num2Input.value);
-        if ((num1 !== 0 && !isNaN(num1)) || (num2 !== 0 && !isNaN(num2))) {
-          const response = await fetch(`http://localhost:${apiPort}/subtract`, {
-            // Use the apiPort variable
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ num1, num2 }),
-          });
-          const data = await response.json();
-          displayResult(data.result);
-
-          const resultdata = {
-                operand_one: num1,
-                operand_two: num2,
-                operator: "Sub",
-                result: data.result,
-                date_of_creation: new Date().toISOString()
-            };
-
-            try {
-                const response = await fetch('http://localhost:5555/insert', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(resultdata)
-                });
-
-                if (response.ok) {
-                    alert('Calculation inserted successfully.');
-                } else {
-                    alert('Error inserting calculation.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        } else {
-          resultLabel.textContent = "num1 or num2 is either zero or invalid.";
-        }
-      });
-    </script>
-  </body>
 </html>
